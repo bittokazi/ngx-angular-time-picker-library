@@ -8,6 +8,10 @@ This is a simple time picker which has infinite scrolling(UP/DOWN) for Angular. 
 npm install ngx-angular-time-picker-library --save
 ```
 
+## Demo Link Below
+
+[Live Demo](https://ngx-angular-time-picker.bittokazi.com/)
+
 ## Example 12hr
 
 ![](img1.gif)
@@ -15,10 +19,6 @@ npm install ngx-angular-time-picker-library --save
 ## Example 24hr
 
 ![](img2.gif)
-
-## Demo Link Below
-
-[Demo](https://vue-spider-graph.herokuapp.com/)
 
 ## Usage
 
@@ -33,8 +33,8 @@ npm install ngx-angular-time-picker-library --save
     [left]="'0px'"
     [enableSecond]="true"
     [format]="'12hr'"
-    [backgroundColorCell]="'red'"
-    [backgroundColorCellHover]="'green'"
+    [backgroundColorCell]="'#00b6ff'"
+    [backgroundColorCellHover]="'#b0e8ff'"
   >
     <input
       type="text"
@@ -86,7 +86,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AngularTimePickerLibrary } from "projects/angulat-time-picker-library/src/public-api";
+import { NgxAngularTimePickerLibraryModule } from "ngx-angular-time-picker-library";
 import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({

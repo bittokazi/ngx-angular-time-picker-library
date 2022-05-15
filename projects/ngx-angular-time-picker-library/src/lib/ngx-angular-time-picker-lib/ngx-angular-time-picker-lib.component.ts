@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import * as _moment from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'ngx-angular-time-picker',
@@ -82,24 +82,26 @@ export class NgxAngurlarTimePickerLibComponent implements OnInit {
   ngOnInit(): void {
     let format12hr = this.enableSecond ? 'hh:mm:ss A' : 'hh:mm A';
     let format24hr = this.enableSecond ? 'HH:mm:ss' : 'HH:mm';
+    console.log(moment);
+
     if (this.control.value.split(' ').length > 1) {
       if (this.format !== '12hr') {
         this.control.patchValue(
-          _moment(this.control.value, [format12hr]).format(format24hr)
+          moment(this.control.value, [format12hr]).format(format24hr)
         );
       } else {
         this.control.patchValue(
-          _moment(this.control.value, [format12hr]).format(format12hr)
+          moment(this.control.value, [format12hr]).format(format12hr)
         );
       }
     } else {
       if (this.format === '12hr') {
         this.control.patchValue(
-          _moment(this.control.value, [format24hr]).format(format12hr)
+          moment(this.control.value, [format24hr]).format(format12hr)
         );
       } else {
         this.control.patchValue(
-          _moment(this.control.value, [format24hr]).format(format24hr)
+          moment(this.control.value, [format24hr]).format(format24hr)
         );
       }
     }
@@ -120,16 +122,16 @@ export class NgxAngurlarTimePickerLibComponent implements OnInit {
         this.format === '12hr'
           ? this.control.value.split(':')[0] - 1
           : this.control.value.split(':')[0];
-      this.selectedMinuteIndex = _moment(this.control.value, [
+      this.selectedMinuteIndex = moment(this.control.value, [
         this.format === '12hr' ? format12hr : format24hr,
       ]).format('mm');
       if (this.enableSecond && this.control.value.split(':').length > 2) {
-        this.selectedSecondIndex = _moment(this.control.value, [
+        this.selectedSecondIndex = moment(this.control.value, [
           this.format === '12hr' ? format12hr : format24hr,
         ]).format('ss');
       }
       if (this.format === '12hr') {
-        this.selectedAmPm = _moment(this.control.value, [
+        this.selectedAmPm = moment(this.control.value, [
           this.format === '12hr' ? format12hr : format24hr,
         ])
           .format('A')
@@ -201,7 +203,7 @@ export class NgxAngurlarTimePickerLibComponent implements OnInit {
         hour.active = index === i;
         let minute = '00';
         if (this.control.value && this.control.value.split(':').length > 0) {
-          minute = _moment(this.control.value, [
+          minute = moment(this.control.value, [
             this.format === '12hr' ? format12hr : format24hr,
           ]).format('mm');
         }
@@ -294,13 +296,13 @@ export class NgxAngurlarTimePickerLibComponent implements OnInit {
       this.selectedAmPm = aMpM;
       let hour = '00';
       if (this.control.value && this.control.value.split(':').length > 0) {
-        hour = _moment(this.control.value, [
+        hour = moment(this.control.value, [
           this.format === '12hr' ? format12hr : format24hr,
         ]).format(this.format === '12hr' ? 'hh' : 'HH');
       }
       let minute = '00';
       if (this.control.value && this.control.value.split(':').length > 0) {
-        minute = _moment(this.control.value, [
+        minute = moment(this.control.value, [
           this.format === '12hr' ? format12hr : format24hr,
         ]).format('mm');
       }
@@ -368,12 +370,12 @@ export class NgxAngurlarTimePickerLibComponent implements OnInit {
       output = {
         ...output,
         '12hr': time,
-        '24hr': _moment(time, [format12hr]).format(format24hr),
+        '24hr': moment(time, [format12hr]).format(format24hr),
       };
     } else {
       output = {
         ...output,
-        '12hr': _moment(time, [format24hr]).format(format12hr),
+        '12hr': moment(time, [format24hr]).format(format12hr),
         '24hr': time,
       };
     }
