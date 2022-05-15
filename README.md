@@ -12,14 +12,6 @@ npm install ngx-angular-time-picker-library --save
 
 [Live Demo](https://ngx-angular-time-picker.bittokazi.com/)
 
-## Example 12hr
-
-![](img1.gif)
-
-## Example 24hr
-
-![](img2.gif)
-
 ## Usage
 
 #### in html file (_app.component.html_)
