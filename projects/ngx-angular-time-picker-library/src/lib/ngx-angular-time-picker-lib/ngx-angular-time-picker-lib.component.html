@@ -1,0 +1,269 @@
+<div (click)="onInputClick()" class="time-picker-wrapper">
+  <ng-content></ng-content>
+  <div
+    class="time-selector-box"
+    [class.time-selector-box-open]="!hide"
+    [style.top]="top"
+    [style.left]="left"
+    [style.width]="width + 'px'"
+    *ngIf="show"
+  >
+    <div class="up-arrow" (click)="arrowTicker(-50, 'hour')">
+      <mat-icon aria-hidden="false" aria-label="keyboard_arrow_up icon"
+        >keyboard_arrow_up</mat-icon
+      >
+    </div>
+    <div
+      class="selector-column"
+      (scroll)="onScrollLoopCheck($event, 'hour')"
+      #hourContainer
+    >
+      <div
+        class="selector-cell"
+        *ngFor="let lastHourCell of lastHourCells"
+        [class.active]="hours[lastHourCell].active"
+        (click)="selectHour(lastHourCell)"
+        (mouseover)="hours[lastHourCell].hover = true"
+        (mouseleave)="hours[lastHourCell].hover = false"
+        [ngStyle]="{
+          'background-color': hours[lastHourCell].active
+            ? backgroundColorCell
+            : hours[lastHourCell].hover
+            ? backgroundColorCellHover
+            : ''
+        }"
+      >
+        <ng-container *ngIf="format === '12hr'">
+          {{ lastHourCell + 1 }}
+        </ng-container>
+        <ng-container *ngIf="format != '12hr'">
+          {{ lastHourCell }}
+        </ng-container>
+      </div>
+      <div
+        *ngFor="let item of hours; let i = index"
+        class="selector-cell"
+        [class.active]="item.active"
+        (click)="selectHour(i)"
+        (mouseover)="item.hover = true"
+        (mouseleave)="item.hover = false"
+        [ngStyle]="{
+          'background-color': item.active
+            ? backgroundColorCell
+            : item.hover
+            ? backgroundColorCellHover
+            : ''
+        }"
+      >
+        {{ item.time }}
+      </div>
+      <div
+        class="selector-cell"
+        *ngFor="let firstCell of firstCells"
+        [class.active]="hours[firstCell].active"
+        (click)="selectHour(firstCell)"
+        (mouseover)="hours[firstCell].hover = true"
+        (mouseleave)="hours[firstCell].hover = false"
+        [ngStyle]="{
+          'background-color': hours[firstCell].active
+            ? backgroundColorCell
+            : hours[firstCell].hover
+            ? backgroundColorCellHover
+            : ''
+        }"
+      >
+        <ng-container *ngIf="format === '12hr'">
+          0{{ firstCell + 1 }}
+        </ng-container>
+        <ng-container *ngIf="format != '12hr'"> 0{{ firstCell }} </ng-container>
+      </div>
+    </div>
+    <div class="down-arrow" (click)="arrowTicker(50, 'hour')">
+      <mat-icon aria-hidden="false" aria-label="keyboard_arrow_down icon"
+        >keyboard_arrow_down</mat-icon
+      >
+    </div>
+    <div class="up-arrow up-arrow-minute" (click)="arrowTicker(-50, 'minute')">
+      <mat-icon aria-hidden="false" aria-label="keyboard_arrow_up icon"
+        >keyboard_arrow_up</mat-icon
+      >
+    </div>
+    <div
+      class="selector-column"
+      (scroll)="onScrollLoopCheck($event, 'minute')"
+      #minuteContainer
+    >
+      <div
+        class="selector-cell"
+        *ngFor="let lastMinuteCell of lastMinuteCells"
+        [class.active]="minutes[lastMinuteCell].active"
+        (click)="selectMinute(lastMinuteCell)"
+        (mouseover)="minutes[lastMinuteCell].hover = true"
+        (mouseleave)="minutes[lastMinuteCell].hover = false"
+        [ngStyle]="{
+          'background-color': minutes[lastMinuteCell].active
+            ? backgroundColorCell
+            : minutes[lastMinuteCell].hover
+            ? backgroundColorCellHover
+            : ''
+        }"
+      >
+        {{ lastMinuteCell }}
+      </div>
+      <div
+        *ngFor="let item of minutes; let i = index"
+        class="selector-cell"
+        [class.active]="item.active"
+        (click)="selectMinute(i)"
+        (mouseover)="item.hover = true"
+        (mouseleave)="item.hover = false"
+        [ngStyle]="{
+          'background-color': item.active
+            ? backgroundColorCell
+            : item.hover
+            ? backgroundColorCellHover
+            : ''
+        }"
+      >
+        {{ item.time }}
+      </div>
+      <div
+        class="selector-cell"
+        *ngFor="let firstCell of firstCells"
+        [class.active]="minutes[firstCell].active"
+        (click)="selectMinute(firstCell)"
+        (mouseover)="minutes[firstCell].hover = true"
+        (mouseleave)="minutes[firstCell].hover = false"
+        [ngStyle]="{
+          'background-color': minutes[firstCell].active
+            ? backgroundColorCell
+            : minutes[firstCell].hover
+            ? backgroundColorCellHover
+            : ''
+        }"
+      >
+        0{{ firstCell }}
+      </div>
+    </div>
+    <div
+      class="down-arrow down-arrow-minute"
+      (click)="arrowTicker(50, 'minute')"
+    >
+      <mat-icon aria-hidden="false" aria-label="keyboard_arrow_down icon"
+        >keyboard_arrow_down</mat-icon
+      >
+    </div>
+    <div
+      class="up-arrow up-arrow-second"
+      (click)="arrowTicker(-50, 'second')"
+      *ngIf="enableSecond"
+    >
+      <mat-icon aria-hidden="false" aria-label="keyboard_arrow_up icon"
+        >keyboard_arrow_up</mat-icon
+      >
+    </div>
+    <div
+      class="selector-column"
+      (scroll)="onScrollLoopCheck($event, 'second')"
+      #secondContainer
+      *ngIf="enableSecond"
+    >
+      <div
+        class="selector-cell"
+        *ngFor="let lastMinuteCell of lastMinuteCells"
+        [class.active]="seconds[lastMinuteCell].active"
+        (click)="selectSecond(lastMinuteCell)"
+        (mouseover)="seconds[lastMinuteCell].hover = true"
+        (mouseleave)="seconds[lastMinuteCell].hover = false"
+        [ngStyle]="{
+          'background-color': seconds[lastMinuteCell].active
+            ? backgroundColorCell
+            : seconds[lastMinuteCell].hover
+            ? backgroundColorCellHover
+            : ''
+        }"
+      >
+        {{ lastMinuteCell }}
+      </div>
+      <div
+        *ngFor="let item of seconds; let i = index"
+        class="selector-cell"
+        [class.active]="item.active"
+        (click)="selectSecond(i)"
+        (mouseover)="item.hover = true"
+        (mouseleave)="item.hover = false"
+        [ngStyle]="{
+          'background-color': item.active
+            ? backgroundColorCell
+            : item.hover
+            ? backgroundColorCellHover
+            : ''
+        }"
+      >
+        {{ item.time }}
+      </div>
+      <div
+        class="selector-cell"
+        *ngFor="let firstCell of firstCells"
+        [class.active]="seconds[firstCell].active"
+        (click)="selectSecond(firstCell)"
+        (mouseover)="seconds[firstCell].hover = true"
+        (mouseleave)="seconds[firstCell].hover = false"
+        [ngStyle]="{
+          'background-color': seconds[firstCell].active
+            ? backgroundColorCell
+            : seconds[firstCell].hover
+            ? backgroundColorCellHover
+            : ''
+        }"
+      >
+        0{{ firstCell }}
+      </div>
+    </div>
+    <div
+      class="down-arrow down-arrow-second"
+      (click)="arrowTicker(50, 'second')"
+      *ngIf="enableSecond"
+    >
+      <mat-icon aria-hidden="false" aria-label="keyboard_arrow_down icon"
+        >keyboard_arrow_down</mat-icon
+      >
+    </div>
+    <div class="selector-column" *ngIf="format === '12hr'">
+      <div
+        class="selector-cell"
+        [class.active]="activeAmPm('AM')"
+        (click)="selectAmPm('AM')"
+        (mouseover)="aMpMHoverStatus.am.hover = true"
+        (mouseleave)="aMpMHoverStatus.am.hover = false"
+        [ngStyle]="{
+          'background-color':
+            selectedAmPm == 'AM'
+              ? backgroundColorCell
+              : aMpMHoverStatus.am.hover
+              ? backgroundColorCellHover
+              : ''
+        }"
+      >
+        AM
+      </div>
+      <div
+        class="selector-cell"
+        [class.active]="activeAmPm('PM')"
+        (click)="selectAmPm('PM')"
+        (mouseover)="aMpMHoverStatus.pm.hover = true"
+        (mouseleave)="aMpMHoverStatus.pm.hover = false"
+        [ngStyle]="{
+          'background-color':
+            selectedAmPm == 'PM'
+              ? backgroundColorCell
+              : aMpMHoverStatus.pm.hover
+              ? backgroundColorCellHover
+              : ''
+        }"
+      >
+        PM
+      </div>
+    </div>
+  </div>
+</div>

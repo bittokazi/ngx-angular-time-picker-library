@@ -1,27 +1,127 @@
-# NgxAngularTimePickerLib
+# ngx-angular-time-picker-library
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+This is a simple time picker which has infinite scrolling(UP/DOWN) for Angular. Time format 12hr/24hr supported.
 
-## Development server
+## Install
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+npm install ngx-angular-time-picker-library --save
+```
 
-## Code scaffolding
+## Example 12hr
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![](img1.gif)
 
-## Build
+## Example 24hr
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![](img2.gif)
 
-## Running unit tests
+## Demo Link Below
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[Demo](https://vue-spider-graph.herokuapp.com/)
 
-## Running end-to-end tests
+## Usage
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#### in html file (_app.component.html_)
 
-## Further help
+```html
+<form [formGroup]="form" style="float: left; width: 100%">
+  <ngx-angular-time-picker
+    [control]="form.controls.time"
+    (onTimeChange)="onTimeChange($event)"
+    [top]="'20px'"
+    [left]="'0px'"
+    [enableSecond]="true"
+    [format]="'12hr'"
+    [backgroundColorCell]="'red'"
+    [backgroundColorCellHover]="'green'"
+  >
+    <input
+      type="text"
+      formControlName="time"
+      #timePickerInput
+      (focus)="timePickerInput.blur()"
+    />
+  </ngx-angular-time-picker>
+</form>
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<br>
+
+#### in componet file (_app.component.ts_)
+
+```typescript
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
+
+@Component({
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
+})
+export class AppComponent implements OnInit {
+  public form: any;
+
+  constructor() {
+    this.form = new FormGroup({
+      time: new FormControl("12:40 AM"),
+    });
+  }
+
+  ngOnInit(): void {}
+
+  onTimeChange($event: any) {
+    console.log($event);
+  }
+}
+```
+
+<br>
+
+#### in modeule file (_app.module.ts_)
+
+```typescript
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AngularTimePickerLibrary } from "projects/angulat-time-picker-library/src/public-api";
+import { ReactiveFormsModule } from "@angular/forms";
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    AngularTimePickerLibrary,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+<br>
+
+## Options
+
+### Props
+
+| Props                                | Default | Description                              |
+| ------------------------------------ | ------- | ---------------------------------------- |
+| **control**: FormControl             | null    | FormControl                              |
+| **top**: string                      | 0px     | offset from input                        |
+| **left**: string                     | 0px     | offset from left                         |
+| **enableSecond**: boolean            | false   | If second can be selected                |
+| **format**: string                   | 24hr    | can be 12hr or 24hr                      |
+| **backgroundColorCell**: string      | #00b6ff | Background color of selected cell        |
+| **backgroundColorCellHover**: string | #b0e8ff | Background color when hovering over cell |
+
+### Callback Methods
+
+| Name                 | Type   | Description                                                                   |
+| -------------------- | :----- | ----------------------------------------------------------------------------- |
+| onTimeChange(Object) | Object | Outputs time in 24hr and 12hr example: { "24hr": "00:00", "12hr": "12:00 AM"} |

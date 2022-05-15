@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -94,9 +95,41 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "ngx-angular-time-picker-library": {
+      "projectType": "library",
+      "root": "projects/ngx-angular-time-picker-library",
+      "sourceRoot": "projects/ngx-angular-time-picker-library/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-angular-time-picker-library/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-angular-time-picker-library/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-angular-time-picker-library/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-angular-time-picker-library/src/test.ts",
+            "tsConfig": "projects/ngx-angular-time-picker-library/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-angular-time-picker-library/karma.conf.js"
           }
         }
       }
