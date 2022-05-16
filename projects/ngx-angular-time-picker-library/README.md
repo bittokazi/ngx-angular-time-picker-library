@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
 
 <br>
 
-#### in modeule file (_app.module.ts_)
+#### in any module file for example (_app.module.ts_) add NgxAngularTimePickerLibraryModule
 
 ```typescript
 import { NgModule } from "@angular/core";
@@ -88,7 +88,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    AngularTimePickerLibrary,
+    NgxAngularTimePickerLibraryModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
