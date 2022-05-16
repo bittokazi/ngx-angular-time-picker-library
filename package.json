@@ -1,6 +1,28 @@
 {
   "name": "ngx-angular-time-picker-lib",
   "version": "1.0.1",
+  "description": "Time picker library with Infinite Scroll (UP/DOWN) for angular application.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bittokazi/ngx-angular-time-picker-library.git"
+  },
+  "keywords": [
+    "angular",
+    "javascript",
+    "time",
+    "timepicker",
+    "time-picker",
+    "ngx",
+    "date-picker",
+    "ngx-time-picker",
+    "angular-material"
+  ],
+  "author": "Bitto Kazi (bitto.kazi@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bittokazi/ngx-angular-time-picker-library/issues"
+  },
+  "homepage": "https://github.com/bittokazi/ngx-angular-time-picker-library#readme",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
