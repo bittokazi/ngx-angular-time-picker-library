@@ -30,7 +30,8 @@
     "build": "./build.sh",
     "watch": "ng build --watch --configuration development",
     "dev": "./build_package.sh",
-    "test": "ng test"
+    "test": "ng test",
+    "pub": "./npm_publish.sh"
   },
   "private": true,
   "dependencies": {
