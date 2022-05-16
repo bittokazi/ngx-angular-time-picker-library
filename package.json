@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "build:demo": "ng build",
     "build": "./build.sh",
     "watch": "ng build --watch --configuration development",
     "dev": "./build_package.sh",
@@ -11,6 +12,10 @@
   },
   "private": true,
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "request": "^2.88.0",
     "@angular/animations": "~13.1.0",
     "@angular/cdk": "^13.3.7",
     "@angular/common": "~13.1.0",
