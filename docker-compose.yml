@@ -3,6 +3,9 @@ version: "3"
 services:
   ngx-angular-time-picker-lib:
     container_name: ngx-angular-time-picker-lib
+    build:
+      context: ./
+      dockerfile: Dockerfile
     image: ngx-angular-time-picker-lib
     restart: always
     network_mode: bridge
